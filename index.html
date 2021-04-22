@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kuis pilihan ganda</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="opening-window">
+        <h1>Selamat bermain</h1>
+        <button onclick="play()" class="button">Main</button>
+      </div>
+
+      <div id="quiz-window" style="display: none">
+        <h3 id="question"></h3>
+
+        <div id="choices">
+          <input type="radio" name="choices" data-id="0" id="choice0" />
+          <label for="choice0" id="choiceText0">pilihan-1</label>
+
+          <input type="radio" name="choices" data-id="1" id="choice1" />
+          <label for="choice1" id="choiceText1">pilihan-2</label>
+
+          <input type="radio" name="choices" data-id="2" id="choice2" />
+          <label for="choice2" id="choiceText2">pilihan-3</label>
+
+          <input type="radio" name="choices" data-id="3" id="choice3" />
+          <label for="choice3" id="choiceText3">pilihan-4</label>
+        </div>
+
+        <button id="next">Next</button>
+      </div>
+
+      <div id="closing-window">
+        <h2>permainan selesai</h2>
+        <p id="closing-text"></p>
+
+        <!-- <button id="again-button">Main lagi</button> -->
+      </div>
+    </div>
+
+    <script>
+      // ========DATA==================
+      // ==============================
+      const QUIZ = [
+        {
+          question: " '\n BAKSO '\n dibalik jadi...",
+          answers: ["OSKBA", "tumpah", "BAKSOS", "apa sih gaje??"],
+        },
+        {
+          question: " satu tambah satu sama dengan...",
+          answers: ["sebelas", "jendela", "dua", "gk ada yg bener"],
+        },
+        {
+          question: " ayam dulu apa telur...",
+          answers: ["burung", "telur", "gmna-gmna?", "ayam"],
+        },
+      ];
+
+      const CORRECT_ANSWER = [1, 2, 3];
+
+      // ========Setup==================
+      // ================================
+      let current_qt = 0;
+      let saved_answer = [];
+      let score = 0;
+
+      const play = () => {
+        document.getElementById("opening-window").style.display = "none";
+        document.getElementById("quiz-window").style.display = "block";
+      };
+
+      document.addEventListener("DOMContentLoaded", function (event) {
+        setupQuestion();
+      });
+
+      const setupQuestion = () => {
+        document.getElementById("question").innerHTML = QUIZ[current_qt]["question"];
+        document.getElementById("choiceText0").innerHTML = QUIZ[current_qt]["answers"][0];
+        document.getElementById("choiceText1").innerHTML = QUIZ[current_qt]["answers"][1];
+        document.getElementById("choiceText2").innerHTML = QUIZ[current_qt]["answers"][2];
+        document.getElementById("choiceText3").innerHTML = QUIZ[current_qt]["answers"][3];
+      };
+
+      const next_button = document.getElementById("next");
+      next_button.addEventListener("click", () => {
+        console.log(current_qt++);
+        saveAnswer();
+        resetState();
+        // console.log(current_qt);
+        if (current_qt > QUIZ.length - 1) {
+          stopQuiz();
+        } else {
+          setupQuestion();
+        }
+      });
+
+      // const againBt = document.getElementById("again-button").addEventListener("click", function () {
+      //   current_qt = 0;
+      //   saved_answer = [];
+      //   score = 0;
+      //   document.getElementById("closing-window").style.display = "none";
+      //   document.getElementById("quiz-window").style.display = "block";
+      // });
+      // }
+
+      const stopQuiz = () => {
+        checkScore();
+        document.getElementById("opening-window").style.display = "none";
+        document.getElementById("quiz-window").style.display = "none";
+        document.getElementById("closing-window").style.display = "block";
+        document.getElementById("closing-text").innerHTML = "selamat, score anda : " + score;
+      };
+
+      const saveAnswer = () => {
+        const answer = document.querySelector("input[name='choices']:checked");
+        if (answer != null) {
+          saved_answer.push(parseInt(answer.getAttribute("data-id")));
+        } else {
+          saved_answer.push(100);
+        }
+      };
+
+      const checkScore = () => {
+        for (let i = 0; i < CORRECT_ANSWER.length; i++) {
+          if (saved_answer[i] === CORRECT_ANSWER[i]) {
+            score += 100;
+          }
+        }
+      };
+
+      const resetState = () => {
+        const checkAnswer = document.querySelector("input[name='choices']:checked");
+        if (checkAnswer != null) {
+          checkAnswer.checked = false;
+        }
+      };
+    </script>
+  </body>
+</html>

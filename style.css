@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica, "sans-serif";
+  background-image: linear-gradient(to left, purple, rgb(255, 102, 0));
+}
+
+.container {
+  width: 60%;
+  margin: 20px auto;
+  border-radius: 40px;
+  box-shadow: 2px 4px 14px black;
+  background-color: #ffffff;
+}
+
+#opening-window {
+  display: block;
+  height: 500px;
+  text-align: center;
+  padding: 20% 5em;
+  /* display: flex; */
+}
+
+#opening-window h1 {
+  font-size: 45px;
+  color: rgb(0, 0, 44);
+}
+
+#opening-window button {
+  width: 40%;
+  height: 40px;
+  color: white;
+  font-size: 1.2rem;
+  border: transparent;
+  border-radius: 30px;
+  background-image: linear-gradient(to left, purple, rgb(255, 102, 0));
+  transition: 0.1s;
+}
+#opening-window button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+#quiz-window {
+  display: block;
+  height: 500px;
+  text-align: center;
+  padding: 20% 5em;
+}
+
+#quiz-window #choices {
+  display: flex;
+  position: relative;
+  /* border: 2px solid blue; */
+  height: 80px;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#quiz-window h3 {
+  font-size: 28px;
+  color: rgb(0, 0, 44);
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: rgb(187, 187, 187);
+}
+
+#quiz-window #choices input {
+  display: none;
+}
+
+#quiz-window #choices label {
+  margin: 2px 2%;
+  height: 26px;
+  color: white;
+  border: transparent;
+  border-radius: 20px;
+  background: rgb(20, 255, 98);
+  width: 40%;
+  font-size: 20px;
+}
+#quiz-window #choices label:hover {
+  cursor: pointer;
+  background-color: cyan;
+  transition: 0.3s;
+}
+
+#quiz-window button {
+  margin-top: 10px;
+  width: 30%;
+  height: 30px;
+  color: white;
+  /* font-size: 1.2rem; */
+  border: transparent;
+  border-radius: 30px;
+  background-image: linear-gradient(to left, purple, rgb(255, 102, 0));
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+/* closing window */
+#closing-window {
+  display: none;
+  height: 500px;
+  text-align: center;
+  padding: 20% 5em;
+}
+
+#closing-window h2 {
+  font-size: 36px;
+  color: rgb(0, 0, 44);
+}
+
+#closing-window #closing-text {
+  font-size: 20px;
+  color: black;
+}
